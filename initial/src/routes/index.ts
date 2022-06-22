@@ -14,4 +14,8 @@ router.get('/sobre', (req: Request, res: Response) => {
     res.send("Pagina de sobre");
 });
 
+router.get('/parana', (req: Request, res: Response) => {
+    res.send("Pagina parana");
+});
+
 export default router;
