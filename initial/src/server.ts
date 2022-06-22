@@ -1,10 +1,13 @@
 import express, { Request, Response } from "express";
+import path from "path";
 
 import mainRoutes from './routes/index';
 import panelRoutes from './routes/panel';
 
 
 const server = express();
+
+server.use('/static', express.static(path.join(__dirname, '../public')));
 
 server.use(mainRoutes); 
 server.use('/panel', panelRoutes);
