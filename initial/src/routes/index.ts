@@ -5,8 +5,13 @@ const router = Router();
 router.get('/', (req: Request, res: Response) => {
     let user = {
         name: 'Ricardo',
-        age: 90
+        age: 25,
+        showWelcome: true,
+        showOld: true
     }
+
+    user.showOld = user.age > 30 ? true : false;
+
     res.render('home', {
         user
     });

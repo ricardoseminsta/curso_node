@@ -4,5 +4,11 @@
 </head>
     <h1>Título da Pagina</h1>
     <hr />
-    Opa tudo bem, como vai, {{ user.name }}? 
+    {{#user.showWelcome}}
+        Opa tudo bem, como vai, {{ user.name }}? 
+    {{/user.showWelcome}}
+
+    {{#user.showOld}}
+        sua idade aparece {{ user.age }}
+    {{/user.showOld}}
 </html>
