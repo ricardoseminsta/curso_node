@@ -11,4 +11,19 @@
     {{#user.showOld}}
         sua idade aparece {{ user.age }}
     {{/user.showOld}}
+    <hr />
+    <h2>Produtos</h2>
+    <ul>
+        {{#user.products}}
+            <li>{{ title }} - R$ {{ price }}</li>
+        {{/user.products}}
+    </ul>
+    <hr />
+    <h2>Skills</h2>
+    <ul>
+        {{#user.skills}}
+            <li>{{ . }}</li>
+        {{/user.skills}}
+    </ul>
+
 </html>
