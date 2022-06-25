@@ -24,6 +24,9 @@
         {{#user.skills}}
             <li>{{ . }}</li>
         {{/user.skills}}
+        {{^user.skills}}
+            Não há habilidades
+        {{/user.skills}}
     </ul>
 
 </html>
