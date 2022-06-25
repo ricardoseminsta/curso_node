@@ -1,7 +1,4 @@
-<html>
-<head>
-    <title>Pagina Home | Mustache</title>
-</head>
+{{>partials/header}}
     <h1>Título da Pagina</h1>
     <hr />
     {{#user.showWelcome}}
@@ -15,7 +12,7 @@
     <h2>Produtos</h2>
     <ul>
         {{#user.products}}
-            <li>{{ title }} - R$ {{ price }}</li>
+            {{>partials/productItem}}
         {{/user.products}}
     </ul>
     <hr />
@@ -28,5 +25,4 @@
             Não há habilidades
         {{/user.skills}}
     </ul>
-
-</html>
+{{>partials/footer}}

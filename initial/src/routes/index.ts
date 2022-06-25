@@ -18,21 +18,18 @@ router.get('/', (req: Request, res: Response) => {
 
     user.showOld = user.age > 30 ? true : false;
 
-    res.render('home', {
+    res.render('pages/home', {
         user
     });
 });
 
 router.get('/contato', (req: Request, res: Response) => {
-    res.send("Formulario de contato");
+    res.render('pages/contato')
 });
 
 router.get('/sobre', (req: Request, res: Response) => {
-    res.send("Pagina de sobre");
+    res.render('pages/sobre')
 });
 
-router.get('/parana', (req: Request, res: Response) => {
-    res.send("Pagina parana");
-});
 
 export default router;
