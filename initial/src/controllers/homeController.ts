@@ -1,16 +1,17 @@
 import { Request, Response } from "express";
+import { Product } from "../models/Product";
 
 export const home = (req: Request, res: Response) => {
+    let lista = Product.getAll();
+    let expensivelist = Product.getFromPriceAfter(12);
+
     let user = {
         name: 'Ricardo',
         age: 25,
         showWelcome: true,
         showOld: true,
-        products: [
-            {title:'Produto X', price:10},
-            {title:'Produto Y', price:20},
-            {title:'Produto Z', price:22}
-        ],
+        products: lista,
+        expensives: expensivelist,
         skills: ['brave', 'mustache', 'faster', 'express']
     }
 

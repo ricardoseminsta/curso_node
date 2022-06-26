@@ -16,6 +16,13 @@
         {{/user.products}}
     </ul>
     <hr />
+    <h2>Produtos a partir de 12 reais</h2>
+    <ul>
+        {{#user.expensives}}
+            {{>partials/productItem}}
+        {{/user.expensives}}
+    </ul>
+    <hr />
     <h2>Skills</h2>
     <ul>
         {{#user.skills}}
