@@ -4,13 +4,10 @@ import { User } from "../models/User";
 
 export const home = async (req: Request, res: Response) => {
 
-    let users = await User.findAll();
-
-
-
-
-
-
+    let users = await User.findAll({
+        attributes: {exclude: ["id"]}, //o que eu quero['name', 'age']
+        where: { name: 'Ricardo' }
+    });
 
     let lista = Product.getAll();
     let expensivelist = Product.getFromPriceAfter(12);
