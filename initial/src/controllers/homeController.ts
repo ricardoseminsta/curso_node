@@ -1,12 +1,18 @@
 import { Request, Response } from "express";
 import { Product } from "../models/Product";
 import { User } from "../models/User";
+import { Op } from "sequelize";
 
 export const home = async (req: Request, res: Response) => {
 
     let users = await User.findAll({
         attributes: {exclude: ["id"]}, //o que eu quero['name', 'age']
-        where: { name: 'Ricardo' }
+        where: {
+            [Op.or]: [
+                {name: 'Ricardo'},
+                {age: 18}
+                ]
+        }
     });
 
     let lista = Product.getAll();
