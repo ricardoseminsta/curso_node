@@ -1,17 +1,16 @@
 import { Request, Response } from "express";
 import { Product } from "../models/Product";
-import { sequelize } from "../instances/mysql"; 
+import { User } from "../models/User";
 
 export const home = async (req: Request, res: Response) => {
 
-    try {
-        await sequelize.authenticate();
-        console.log('conexão bem sucedida');
-        
-    } catch (error) {
-        console.log('Deu error:', error);
-        
-    }
+    let users = await User.findAll();
+
+
+
+
+
+
 
     let lista = Product.getAll();
     let expensivelist = Product.getFromPriceAfter(12);
@@ -28,6 +27,7 @@ export const home = async (req: Request, res: Response) => {
 
     user.showOld = user.age > 30 ? true : false;
     res.render('pages/home', {
-        user
+        user,
+        users
     });
 }
