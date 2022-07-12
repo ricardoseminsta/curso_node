@@ -9,13 +9,15 @@ export const home = async (req: Request, res: Response) => {
         attributes: {exclude: ["id"]}, //o que eu quero['name', 'age']
         where: {
             age: {
-                [Op.gte]: 18
+                [Op.gte]: 1
             }
         },
         order: [
-            ['age', 'desc'],
+            ['age', 'asc'],
             ['name','asc']
-        ]
+        ],
+        offset: 4,
+        limit: 2
     });
 
     let lista = Product.getAll();
