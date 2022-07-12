@@ -4,22 +4,23 @@ import { User } from "../models/User";
 import { Op } from "sequelize";
 
 export const home = async (req: Request, res: Response) => {
+    
+    // build + save
+    /*const userC = User.build({
+        name: 'Fulano',
+        age: 25
+    });
+    
+    //await userC.save();*/
 
-    let users = await User.findAll({
-        attributes: {exclude: ["id"]}, //o que eu quero['name', 'age']
-        where: {
-            age: {
-                [Op.gte]: 1
-            }
-        },
-        order: [
-            ['age', 'asc'],
-            ['name','asc']
-        ],
-        offset: 4,
-        limit: 2
+    // create 
+
+    const userC = await User.create({
+        name: 'Ciclano',
+        age: 40
     });
 
+    
     let lista = Product.getAll();
     let expensivelist = Product.getFromPriceAfter(12);
 
@@ -36,6 +37,6 @@ export const home = async (req: Request, res: Response) => {
     user.showOld = user.age > 30 ? true : false;
     res.render('pages/home', {
         user,
-        users
+        
     });
 }
