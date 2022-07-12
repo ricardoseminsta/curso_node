@@ -8,10 +8,15 @@ export const home = async (req: Request, res: Response) => {
     let users = await User.findAll({
         attributes: {exclude: ["id"]}, //o que eu quero['name', 'age']
         where: {
-            [Op.or]: [
-                {name: 'Ricardo'},
-                {age: 18}
-                ]
+            age: {
+                //[Op.gt]: 40, // > 40
+                //[Op.gte]: 40, // >= 40
+                //[Op.lt]: 40, // < 40
+                [Op.lte]: 40 // <= 40
+            },
+            name: {
+                [Op.like]: 'ri%'
+            }
         }
     });
 
