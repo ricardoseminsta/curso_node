@@ -7,11 +7,14 @@ import * as UserController from "../controllers/userController"
 const router = Router();
 
 router.get('/', HomeController.home);
+router.post('/novousuario', HomeController.newUser);
+
 router.get('/contato', InfoController.contato);
 router.get('/sobre', InfoController.sobre);
 
 router.get('/nome', UserController.name);
 router.get('/idade', UserController.age);
 router.post('/idade-resultado', UserController.ageResult);
+
 
 export default router;

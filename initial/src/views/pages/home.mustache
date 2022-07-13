@@ -9,6 +9,15 @@
         sua idade aparece {{ user.age }}
     {{/user.showOld}}
     <hr />
+    <fieldset>
+        <legend>Novo Usuário</legend>
+        <form method="POST" action="/novousuario">
+            <input type="text" name="name" placeholder="Digite um nome" /><br /><br />
+            <input type="text" name="age" placeholder="Digite uma idade" /><br /><br />
+            <input type="submit" value="Inserir Usuário" />
+            </form>
+    </fieldset>
+    <hr />
         <h2>Usuários do Banco</h2>
         <ul>
         {{#users}}
