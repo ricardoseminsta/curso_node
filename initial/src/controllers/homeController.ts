@@ -4,6 +4,15 @@ import { User } from "../models/User";
 import { Op } from "sequelize";
 
 export const home = async (req: Request, res: Response) => {
+    
+    await User.update({ name: 'Jhonson' }, {
+        where: {
+            id: 10
+        }
+    });
+    
+    
+    
     let lista = Product.getAll();
     let expensivelist = Product.getFromPriceAfter(12);
 
@@ -32,8 +41,6 @@ export const newUser = async (req: Request, res: Response) => {
     
     let lista = Product.getAll();
     let expensivelist = Product.getFromPriceAfter(12);
-
-    let users = await User.findAll();
 
     let user = {
         name: 'Ricardo',
