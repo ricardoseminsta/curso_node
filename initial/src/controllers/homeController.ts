@@ -2,16 +2,21 @@ import { Request, Response } from "express";
 import { Product } from "../models/Product";
 import { User } from "../models/User";
 import { Op } from "sequelize";
+import { log } from "console";
 
 
 export const home = async (req: Request, res: Response) => {
-    let userOne = await User.findByPk(3);
-    if(userOne) {
-        console.log(`o usuario: ${userOne.name} possui ${userOne.age} anos`);
-    } else {
-        console.log("Usuario não encontrado");
-        
-    }
+    
+    const [userFOC, created] = await User.findOrCreate({
+        where: { name: "Mingau" },
+        defaults: {
+            age: 7
+        }
+    });
+
+    console.log("USUARIO", userFOC);
+    console.log("CREATED", created);
+    
     
 
 
