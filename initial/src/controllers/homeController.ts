@@ -5,16 +5,11 @@ import { Op } from "sequelize";
 
 
 export const home = async (req: Request, res: Response) => {
+    let userOne = await User.findOne({ where: { id: 1 } });
+    console.log("Usuario", userOne);
     
-    let results = await User.findAll({
-        where: {
-            id: 10
-        }
-    })
-    if(results.length > 0) {
-        let user = results[0];
-        await user.destroy();
-    }
+
+
     let lista = Product.getAll();
     let expensivelist = Product.getFromPriceAfter(12);
 
