@@ -3,16 +3,18 @@ import { Product } from "../models/Product";
 import { User } from "../models/User";
 import { Op } from "sequelize";
 
+
 export const home = async (req: Request, res: Response) => {
     
-    await User.destroy({
+    let results = await User.findAll({
         where: {
-            age: {
-                [Op.lte]: 18
-            }
+            id: 10
         }
-    });
-   
+    })
+    if(results.length > 0) {
+        let user = results[0];
+        await user.destroy();
+    }
     let lista = Product.getAll();
     let expensivelist = Product.getFromPriceAfter(12);
 
