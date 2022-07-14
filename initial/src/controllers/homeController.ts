@@ -5,14 +5,15 @@ import { Op } from "sequelize";
 
 export const home = async (req: Request, res: Response) => {
     
-    await User.update({ name: 'Jhonson' }, {
-        where: {
-            id: 10
-        }
-    });
+    let results = await User.findAll({ where: { id: 7 } });
+    if(results.length > 0) {
+        let user = results[0];
+        user.name = 'Fulano'
+        user.age = 25;
+        await user.save();
+    }
     
-    
-    
+        
     let lista = Product.getAll();
     let expensivelist = Product.getFromPriceAfter(12);
 
