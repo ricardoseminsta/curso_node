@@ -21,7 +21,13 @@
         <h2>Usuários do Banco</h2>
         <ul>
         {{#users}}
-            <li>{{ name }} - Idade: {{ age }}</li>
+            <li>
+                {{ name }}
+                - Idade: {{ age }}
+                - <a href="/usuario/{{id}}/mais">➕</a>
+                - <a href="/usuario/{{id}}/menos">➖</a>
+                - <a href="/usuario/{{id}}/excluir">⛔</a>
+            </li>
         {{/users}}
         </ul>
     <hr />
