@@ -5,8 +5,13 @@ import { Op } from "sequelize";
 
 
 export const home = async (req: Request, res: Response) => {
-    let userOne = await User.findOne({ where: { id: 1 } });
-    console.log("Usuario", userOne);
+    let userOne = await User.findByPk(3);
+    if(userOne) {
+        console.log(`o usuario: ${userOne.name} possui ${userOne.age} anos`);
+    } else {
+        console.log("Usuario não encontrado");
+        
+    }
     
 
 
