@@ -4,14 +4,15 @@ import User from '../models/User';
 
 export const home = async (req: Request, res: Response)=>{
 
-    let newUser = await User.create({
-        name: { firstName: "Vick", lastName: "Fernandes"},
-        email: "vick@gmail.com",
-        age: 3,
-        interests: ["eat", "care", "sleep"]
-    });
+    let newUser = new User();
+    newUser.name = { firstName: "Geralda", lastName: "Demonha" };
+    newUser.email = "geras@gmail.com";
+    newUser.age = 1;
+    newUser.interests = ['running', 'figth', 'eat'];
 
-    console.log('NOVO USUER', newUser);
+    let result = await newUser.save();
+    console.log("Novo Usuario:", result);
+
 
     let age: number = 90;
     let showOld: boolean = false;
