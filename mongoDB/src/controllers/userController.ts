@@ -54,3 +54,13 @@ export const novoUsuario = async (req: Request, res: Response) => {
 }
     res.redirect('/')
 };
+
+export const incrementAge = async (req: Request, res: Response) => {
+    let id:string = req.params.id;
+    let result = await User.findById(id);
+    if(result) {
+        result.age++;
+        await result.save();
+    }
+    res.redirect('/');
+};
