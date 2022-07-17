@@ -33,6 +33,7 @@ export const idadeAction = (req: Request, res: Response) => {
 };
 
 export const novoUsuario = async (req: Request, res: Response) => {
+    
     let newUser = new User();
     newUser.name = {firstName: req.body.firstName, lastName: req.body.lastName}
     newUser.email = req.body.email;
