@@ -3,9 +3,9 @@ import { Product } from '../models/Product';
 import User from '../models/User';
 
 export const home = async (req: Request, res: Response)=>{
-    await User.updateMany(
-        { age: {$lte: 18} },
-        { age: 18 }
+    await User.updateOne(
+        { email: "ricardo@gmail.com" },
+        { age: 45 }
     );
 
     let users = await User.find({}).sort({"name.firstName": 1});
