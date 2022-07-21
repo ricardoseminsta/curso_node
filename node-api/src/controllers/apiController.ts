@@ -19,6 +19,7 @@ export const createPhrase = async (req: Request, res: Response) => {
     let author: string = req.body.author;
     let txt: string = req.body.txt;
     
+    res.status(201);//criado com sucesso
     let newPhrase = await Phrase.create({ author, txt });
     res.json({id: newPhrase.id, author, txt});
 }
