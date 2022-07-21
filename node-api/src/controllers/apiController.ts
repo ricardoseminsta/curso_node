@@ -1,5 +1,6 @@
 import { Request, Response} from "express";
 import { Phrase } from "../models/Phrase";
+import { Sequelize } from "sequelize";
 
 export const ping = (req: Request, res: Response) => {
     res.json({pong: true});
@@ -19,7 +20,60 @@ export const createPhrase = async (req: Request, res: Response) => {
     let author: string = req.body.author;
     let txt: string = req.body.txt;
     
-    res.status(201);//criado com sucesso
+    res.status(201); //criado com sucesso
     let newPhrase = await Phrase.create({ author, txt });
     res.json({id: newPhrase.id, author, txt});
+}
+
+export const listPhrases = async (req: Request, res: Response) => {
+    let list = await Phrase.findAll();
+    res.json({ list });
+}
+
+export const getPhrase = async (req: Request, res: Response) => {
+    let id: number = parseInt(req.params.id);
+
+    let phrase = await Phrase.findByPk(id);
+    if (phrase) {
+        res.json({ phrase });
+    } else {
+        res.json({ error: 'Phrase not found' });
+    }
+    
+}
+
+export const updatePhrase = async (req: Request, res: Response) => {
+    let id: number = parseInt(req.params.id);
+    let author: string = req.body.author;
+    let txt: string = req.body.txt;
+
+    let phrase = await Phrase.findByPk(id);
+
+    if(phrase){
+        phrase.author = author;
+        phrase.txt = txt;
+        await phrase.save();
+        res.json({ phrase });
+    } else {
+        res.json({ error: 'Phrase not found' });
+    }
+}
+
+export const deletePhrase = async (req: Request, res: Response) => {
+    let id: number = parseInt(req.params.id);
+    await Phrase.destroy({ where: { id } });
+    res.json({});
+}
+
+export const randomPhrase = async (req: Request, res: Response) => {
+let phrase = await Phrase.findOne({
+    order: [
+        Sequelize.fn('RANDOM') // No Mysql é RAND
+    ]
+});
+    if(phrase){
+        res.json({ phrase });
+    } else {
+        res.json({ error: 'Phrase not found' });
+    }
 }
