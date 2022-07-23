@@ -6,7 +6,8 @@ export const ping = (req: Request, res: Response) => {
 }
 
 export const all = async (req: Request, res: Response) => {
-
+    let list = await Todo.findAll();
+    res.json({list});
 }
 
 export const add = async (req: Request, res: Response) => {
