@@ -77,3 +77,9 @@ let phrase = await Phrase.findOne({
         res.json({ error: 'Phrase not found' });
     }
 }
+
+export const uploadFile = async (req: Request, res: Response) => {
+    console.log(req.file);
+    
+    res.json({});
+}
