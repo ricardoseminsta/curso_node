@@ -79,7 +79,7 @@ let phrase = await Phrase.findOne({
 }
 
 export const uploadFile = async (req: Request, res: Response) => {
-    console.log(req.file);
+    console.log(req.files);
     
     res.json({});
 }
