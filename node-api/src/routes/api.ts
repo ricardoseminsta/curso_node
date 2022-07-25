@@ -2,8 +2,18 @@ import { Router } from "express";
 import multer from "multer";
 import * as ApiController from "../controllers/apiController";
 
+const storageConfig = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, './tmp');
+    },
+    filename: (req, file, cb) => {
+        let randomName = Math.floor(Math.random() * 9999999);
+        cb(null, `${randomName}.jpg`);
+    }
+});
+
 const upload = multer({
-    dest: './tmp'
+    storage: storageConfig,
 });
 
 const router = Router();
@@ -19,9 +29,6 @@ router.get('/phrase/:id', ApiController.getPhrase); // dinamicos depois
 router.put('/phrase/:id', ApiController.updatePhrase);
 router.delete('/phrase/:id', ApiController.deletePhrase);
 
-router.post('/upload', upload.fields([
-    { name: 'avatar', maxCount: 1 },
-    { name: 'gallery', maxCount: 3 }
-]), ApiController.uploadFile)
+router.post('/upload', upload.single('avatar'), ApiController.uploadFile)
 
 export default router;
