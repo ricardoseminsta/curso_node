@@ -2,18 +2,8 @@ import { Router } from "express";
 import multer from "multer";
 import * as ApiController from "../controllers/apiController";
 
-const storageConfig = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, './tmp');
-    },
-    filename: (req, file, cb) => {
-        let randomName = Math.floor(Math.random() * 9999999);
-        cb(null, `${randomName}.jpg`);
-    }
-});
-
 const upload = multer({
-    storage: storageConfig,
+    storage: multer.memoryStorage()
 });
 
 const router = Router();
