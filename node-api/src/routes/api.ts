@@ -3,7 +3,11 @@ import multer from "multer";
 import * as ApiController from "../controllers/apiController";
 
 const upload = multer({
-    storage: multer.memoryStorage()
+    dest: './tmp',
+    fileFilter: (req, file, cb) => {
+        const allowed: string[] = ['image/jpg', 'image/jpeg', 'image/png'];
+        cb(null, allowed.includes( file.mimetype ));
+    }
 });
 
 const router = Router();
