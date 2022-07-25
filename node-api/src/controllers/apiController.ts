@@ -80,7 +80,12 @@ let phrase = await Phrase.findOne({
 }
 
 export const uploadFile = async (req: Request, res: Response) => {
-    const files = req.files as { [fileName: string]: Express.Multer.File[] };
+    type UploadTypes = {
+        avatar: Express.Multer.File[],
+        gallery: Express.Multer.File[],
+    }
+    
+    const files = req.files as UploadTypes;
     
     console.log("AVATAR", files.avatar);
     console.log("gallery", files.gallery);
