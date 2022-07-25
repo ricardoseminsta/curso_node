@@ -19,6 +19,9 @@ router.get('/phrase/:id', ApiController.getPhrase); // dinamicos depois
 router.put('/phrase/:id', ApiController.updatePhrase);
 router.delete('/phrase/:id', ApiController.deletePhrase);
 
-router.post('/upload', upload.array('avatars', 2), ApiController.uploadFile)
+router.post('/upload', upload.fields([
+    { name: 'avatar', maxCount: 1 },
+    { name: 'gallery', maxCount: 3 }
+]), ApiController.uploadFile)
 
 export default router;

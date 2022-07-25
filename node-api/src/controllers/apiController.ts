@@ -1,6 +1,7 @@
 import { Request, Response} from "express";
 import { Phrase } from "../models/Phrase";
 import { Sequelize } from "sequelize";
+import { Expression } from "typescript";
 
 export const ping = (req: Request, res: Response) => {
     res.json({pong: true});
@@ -79,7 +80,10 @@ let phrase = await Phrase.findOne({
 }
 
 export const uploadFile = async (req: Request, res: Response) => {
-    console.log(req.files);
+    const files = req.files as { [fileName: string]: Express.Multer.File[] };
     
+    console.log("AVATAR", files.avatar);
+    console.log("gallery", files.gallery);
+
     res.json({});
 }
