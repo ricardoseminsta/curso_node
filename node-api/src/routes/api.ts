@@ -7,7 +7,8 @@ const upload = multer({
     fileFilter: (req, file, cb) => {
         const allowed: string[] = ['image/jpg', 'image/jpeg', 'image/png'];
         cb(null, allowed.includes( file.mimetype ));
-    }
+    },
+    limits: { fieldSize: 2000000 }
 });
 
 const router = Router();
