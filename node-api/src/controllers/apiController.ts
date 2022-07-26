@@ -1,7 +1,7 @@
 import { Request, Response} from "express";
 import { Phrase } from "../models/Phrase";
 import { Sequelize } from "sequelize";
-import { Expression } from "typescript";
+import sharp from "sharp";
 
 export const ping = (req: Request, res: Response) => {
     res.json({pong: true});
@@ -80,8 +80,17 @@ let phrase = await Phrase.findOne({
 }
 
 export const uploadFile = async (req: Request, res: Response) => {
-    console.log("FILE", req.file);
-    console.log("FILES", req.files);
+    if(req.file) {
+        await sharp(req.file.path)
+            .resize(500)
+            .toFormat('jpeg')
+            .toFile(`./public/media/${req.file.filename}.jpg`);
+
+        res.json({image: `${req.file.filename}.jpg`});
+    } else {
+        res.status(400)
+        res.json({ error: 'invalid file' });
+    }
     
     res.json({});
 }
