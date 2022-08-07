@@ -82,7 +82,10 @@ let phrase = await Phrase.findOne({
 export const uploadFile = async (req: Request, res: Response) => {
     if(req.file) {
         await sharp(req.file.path)
-            .resize(500)
+            .resize(300, 300, {
+                fit: sharp.fit.cover,
+                position: 'bottom'
+            })
             .toFormat('jpeg')
             .toFile(`./public/media/${req.file.filename}.jpg`);
 
