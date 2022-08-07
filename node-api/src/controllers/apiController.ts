@@ -91,6 +91,4 @@ export const uploadFile = async (req: Request, res: Response) => {
         res.status(400)
         res.json({ error: 'invalid file' });
     }
-    
-    res.json({});
 }
