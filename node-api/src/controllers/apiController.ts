@@ -1,3 +1,4 @@
+import { unlink } from "fs/promises";
 import { Request, Response} from "express";
 import { Phrase } from "../models/Phrase";
 import { Sequelize } from "sequelize";
@@ -81,15 +82,18 @@ let phrase = await Phrase.findOne({
 
 export const uploadFile = async (req: Request, res: Response) => {
     if(req.file) {
+        const filename = `${req.file.filename}.jpg`;
         await sharp(req.file.path)
             .resize(300, 300, {
                 fit: sharp.fit.cover,
                 position: 'bottom'
             })
             .toFormat('jpeg')
-            .toFile(`./public/media/${req.file.filename}.jpg`);
+            .toFile(`./public/media/${filename}`);
+        
+            await unlink(req.file.path);
 
-        res.json({image: `${req.file.filename}.jpg`});
+        res.json({image: `${filename}`});
     } else {
         res.status(400)
         res.json({ error: 'invalid file' });
