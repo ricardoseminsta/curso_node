@@ -18,9 +18,9 @@ export const register = async (req: Request, res: Response) => {
         } else {
             res.json({ error: 'E-mail já existe.' });
         }
+    } else {
+        res.json({ error: 'E-mail e/ou senha não enviados.' });
     }
-
-    res.json({ error: 'E-mail e/ou senha não enviados.' });
 }
 
 export const login = async (req: Request, res: Response) => {
@@ -36,9 +36,8 @@ export const login = async (req: Request, res: Response) => {
             res.json({ status: true });
             return;
         }
-    }
-
-    res.json({ status: false });
+    } 
+        res.json({ status: false });
 }
 
 export const list = async (req: Request, res: Response) => {
