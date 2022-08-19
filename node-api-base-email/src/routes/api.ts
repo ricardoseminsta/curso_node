@@ -1,12 +1,12 @@
 import { Router } from 'express';
 
 import * as ApiController from '../controllers/apiController';
+import * as EmailController from '../controllers/emailController';
 
 const router = Router();
 
-router.post('/register', ApiController.register);
-router.post('/login', ApiController.login);
+router.post('/ping', ApiController.ping);
 
-router.get('/list', ApiController.list);
+router.post('/contact', EmailController.contact);
 
 export default router;
