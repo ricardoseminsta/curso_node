@@ -32,4 +32,7 @@ const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
 }
 server.use(errorHandler);
 
-server.listen(process.env.PORT);
+server.listen(process.env.PORT, ()=>{
+    console.log('listening on port '+process.env.PORT);
+    
+});
