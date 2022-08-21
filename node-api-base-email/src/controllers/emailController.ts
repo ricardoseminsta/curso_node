@@ -17,11 +17,12 @@ export const contact = async (req: Request, res: Response) => {
     });
 
     let message = {
-        from: 'Ricardo Silva <ricardo@gmail.com>',
-        to: 'joana@gmail.com',
-        subject: 'Welcome to Ricardo Silva',
-        html: 'Welcome to <strong>Ricardo</strong> how are you?',
-        text: 'welcome to Ricardo, how are you?'
+        from: 'no-reply@gmail.com',
+        to: req.body.to,
+        replyTo: req.body.from,
+        subject: req.body.subject,
+        html: req.body.email,
+        text: req.body.email
     };
 
     let info = await transport.sendMail(message);
