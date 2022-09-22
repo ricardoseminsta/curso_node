@@ -32,4 +32,77 @@ describe('testing api routes', () => {
             });
     });
 
+    it('should not allow register with existing email', (done) => {
+        request(app)
+            .post('/register')
+            .send(`email=${email}&password=${password}`)
+            .then(response => {
+                expect(response.body.error).not.toBeUndefined();
+                return done();
+            });
+    });
+
+    it('should not allow register without password', (done) => {
+        request(app)
+            .post('/register')
+            .send(`email=${email}`)
+            .then(response => {
+                expect(response.body.error).not.toBeUndefined();
+                return done();
+            });
+    });
+
+    it('should not allow register without email', (done) => {
+        request(app)
+            .post('/register')
+            .send(`password=${password}`)
+            .then(response => {
+                expect(response.body.error).not.toBeUndefined();
+                return done();
+            });
+    });
+
+    it('should not allow register without any data', (done) => {
+        request(app)
+            .post('/register')
+            .send(``)
+            .then(response => {
+                expect(response.body.error).not.toBeUndefined();
+                return done();
+            });
+    });
+
+    it('should login correctly', (done) => {
+        request(app)
+            .post('/login')
+            .send(`email=${email}&password=${password}`)
+            .then(response => {
+                expect(response.body.error).toBeUndefined();
+                expect(response.body.status).toBeTruthy();
+                return done();
+            });
+    });
+
+    it('should login with incorrect data', (done) => {
+        request(app)
+            .post('/login')
+            .send(`email=${email}&password=invalid`)
+            .then(response => {
+                expect(response.body.error).toBeUndefined();
+                expect(response.body.status).toBeFalsy();
+                return done();
+            });
+    });
+
+    it('should list users', (done) => {
+        request(app)
+            .get('/list')
+            .then(response => {
+                expect(response.body.error).toBeUndefined();
+                expect(response.body.list.length).toBeGreaterThanOrEqual(1);
+                expect(response.body.list).toContain(email);
+                return done();
+            });
+    });
+
 });
